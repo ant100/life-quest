@@ -62,3 +62,5 @@ All tests and builds pass cleanly:
   - All text, dialogue cards, quest logs, and HUD elements are rendered via React HTML/CSS using `@fontsource/plus-jakarta-sans` for razor-sharp legibility across all Retina and high-DPI displays.
 - **Viewport Dimension**:
   - Native stage ratio: 9:16 portrait (`360×640` virtual resolution, scaled with CSS `display: grid; place-items: center` and `min(92vw, 440px)` / `min(88dvh, 760px)`). Perfectly centered on iPhone 16, Pixel, iPad, and desktop.
+- **PWA Manifest Theme Color Alignment (Milestone 5)**:
+  - Updated `theme_color` (`#101c2e`) and `background_color` (`#0a121e`) in `vite.config.ts` and `index.html` to match the selected Option 3 (Deep Abyss / Tokyo Night Calm) palette.

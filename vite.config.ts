@@ -24,8 +24,8 @@ export default defineConfig({
         name: 'Life Quest',
         short_name: 'Life Quest',
         description: 'Pixel art life RPG for mindful goals and side quests',
-        theme_color: '#2d1b2e',
-        background_color: '#2d1b2e',
+        theme_color: '#101c2e',
+        background_color: '#0a121e',
         display: 'standalone',
         orientation: 'portrait',
         icons: [

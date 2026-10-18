@@ -57,7 +57,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }, charDelayMs);
 
     return () => clearTimeout(timer);
-  }, [isLineFinished, charDelayMs]);
+  }, [visibleChars, isLineFinished, charDelayMs]);
 
   const handleAdvance = () => {
     if (!isLineFinished) {
