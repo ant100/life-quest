@@ -1,7 +1,109 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { audio } from './audio/audio';
 import { PhaserGame } from './game/PhaserGame';
+import { eventBus } from './game/eventBus';
+import { useGameStore } from './store/gameStore';
+import { AddChainForm } from './ui/AddChainForm';
+import { AddQuestForm } from './ui/AddQuestForm';
+import { DialogBox } from './ui/DialogBox';
+import { HouseScreen } from './ui/HouseScreen';
+import { Hud } from './ui/Hud';
+import { InnScreen } from './ui/InnScreen';
+import { QuestBoard } from './ui/QuestBoard';
+import { QuestLog } from './ui/QuestLog';
+import { RewardModal } from './ui/RewardModal';
+
+export type ActiveModal =
+  | null
+  | 'questLog'
+  | 'questBoard'
+  | 'addQuest'
+  | 'addChain'
+  | 'house'
+  | 'inn';
 
 export const App: React.FC = () => {
+  const player = useGameStore((s) => s.player);
+  const lastReward = useGameStore((s) => s.lastReward);
+  const pendingReturnBonus = useGameStore((s) => s.pendingReturnBonus);
+  const claimReturnBonus = useGameStore((s) => s.claimReturnBonus);
+  const dismissReward = useGameStore((s) => s.dismissReward);
+  const syncSessionDate = useGameStore((s) => s.syncSessionDate);
+
+  const [activeModal, setActiveModal] = useState<ActiveModal>(null);
+  const [showQuickBar, setShowQuickBar] = useState(true);
+  const [npcDialog, setNpcDialog] = useState<{
+    speaker: string;
+    lines: string[];
+  } | null>(null);
+
+  // Sync session date & check return bonus on mount
+  useEffect(() => {
+    audio.setVolumes(player.musicVolume, player.sfxVolume);
+    syncSessionDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const activeDialog =
+    npcDialog ??
+    (pendingReturnBonus?.eligible
+      ? {
+          speaker: 'Innkeeper Bram',
+          lines: [pendingReturnBonus.message],
+        }
+      : null);
+
+  const hasActiveDialog = activeDialog !== null;
+
+  // Notify Phaser whenever a modal or dialog is open so world input pauses
+  useEffect(() => {
+    const isAnyUiOpen =
+      activeModal !== null || lastReward !== null || hasActiveDialog;
+    if (isAnyUiOpen) {
+      eventBus.emit('ui:open', undefined);
+    } else {
+      eventBus.emit('ui:close', undefined);
+    }
+  }, [activeModal, lastReward, hasActiveDialog]);
+
+  // Listen to Phaser world interactions
+  useEffect(() => {
+    const offBoard = eventBus.on('interact:board', () => {
+      audio.playSfx('select');
+      setActiveModal('questBoard');
+    });
+    const offHouse = eventBus.on('interact:house', () => {
+      audio.playSfx('select');
+      setActiveModal('house');
+    });
+    const offInn = eventBus.on('interact:inn', () => {
+      audio.playSfx('select');
+      setActiveModal('inn');
+    });
+    const offNpc = eventBus.on('interact:npc', (payload) => {
+      audio.playSfx('select');
+      setNpcDialog({
+        speaker: payload.name,
+        lines: [payload.text],
+      });
+    });
+    const offSign = eventBus.on('interact:sign', (payload) => {
+      audio.playSfx('select');
+      setNpcDialog({
+        speaker: payload.title,
+        lines: [payload.text],
+      });
+    });
+
+    return () => {
+      offBoard();
+      offHouse();
+      offInn();
+      offNpc();
+      offSign();
+    };
+  }, []);
+
   return (
     <main
       style={{
@@ -14,12 +116,11 @@ export const App: React.FC = () => {
         backgroundColor: '#0a121e',
         overflow: 'hidden',
         boxSizing: 'border-box',
-        padding: 'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
+        padding:
+          'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
       }}
     >
-      {/* 
-        Game Stage Container (Option 3: Ghost in the Pastel)
-      */}
+      {/* 9:16 Portrait Stage Container (Option 3: Ghost in the Pastel) */}
       <div
         style={{
           width: 'min(92vw, 440px)',
@@ -34,7 +135,8 @@ export const App: React.FC = () => {
           border: '3px solid #17273d',
           borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: '0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(136, 226, 219, 0.18)',
+          boxShadow:
+            '0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(136, 226, 219, 0.18)',
         }}
       >
         {/* Canvas Layer: Pixel art world only */}
@@ -50,91 +152,140 @@ export const App: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            padding: '20px 16px',
+            padding: '12px',
           }}
         >
-          {/* Header Card (Option 3 Palette) */}
+          {/* Top HUD */}
+          <Hud
+            onOpenQuestLog={() => setActiveModal('questLog')}
+            onOpenQuickMenu={() => setShowQuickBar((v) => !v)}
+          />
+
+          {/* Bottom Area: Quick Town Places Menu / Active NPC Dialog */}
           <div
             style={{
-              pointerEvents: 'auto',
-              background: 'rgba(23, 39, 61, 0.95)',
-              border: '2px solid #3f6b88',
-              boxShadow: '0 8px 24px rgba(10, 18, 30, 0.6), inset 0 0 0 1px rgba(136, 226, 219, 0.25)',
-              borderRadius: '14px',
-              padding: '16px 20px',
-              textAlign: 'center',
-              backdropFilter: 'blur(8px)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
             }}
           >
-            <div
-              style={{
-                display: 'inline-block',
-                backgroundColor: '#c2a0d9',
-                color: '#101c2e',
-                fontSize: '11px',
-                fontWeight: 800,
-                letterSpacing: '1px',
-                padding: '3px 10px',
-                borderRadius: '6px',
-                marginBottom: '8px',
-                textTransform: 'uppercase',
-              }}
-            >
-              Side Quest
-            </div>
+            {showQuickBar && !activeDialog && (
+              <nav
+                aria-label="Town quick travel"
+                data-testid="town-quick-nav"
+                style={{
+                  pointerEvents: 'auto',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: '6px',
+                  background: 'rgba(16, 28, 46, 0.9)',
+                  padding: '6px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #3f6b88',
+                  backdropFilter: 'blur(6px)',
+                }}
+              >
+                <button
+                  type="button"
+                  data-testid="nav-quest-board-btn"
+                  className="abyss-btn"
+                  onClick={() => {
+                    audio.playSfx('select');
+                    setActiveModal('questBoard');
+                  }}
+                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                >
+                  📌 Board
+                </button>
+                <button
+                  type="button"
+                  data-testid="nav-house-btn"
+                  className="abyss-btn"
+                  onClick={() => {
+                    audio.playSfx('select');
+                    setActiveModal('house');
+                  }}
+                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                >
+                  🏠 House
+                </button>
+                <button
+                  type="button"
+                  data-testid="nav-inn-btn"
+                  className="abyss-btn"
+                  onClick={() => {
+                    audio.playSfx('select');
+                    setActiveModal('inn');
+                  }}
+                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                >
+                  🏮 Inn
+                </button>
+              </nav>
+            )}
 
-            <h1
-              style={{
-                margin: '0 0 4px 0',
-                fontSize: 'clamp(28px, 6vw, 34px)',
-                fontWeight: 800,
-                color: '#88e2db',
-                letterSpacing: '-0.5px',
-                lineHeight: 1.1,
-                textShadow: '0 2px 10px rgba(136, 226, 219, 0.35)',
-              }}
-            >
-              LIFE QUEST
-            </h1>
-
-            <p
-              style={{
-                margin: 0,
-                fontSize: '14px',
-                fontWeight: 700,
-                color: '#c2a0d9',
-                letterSpacing: '0.2px',
-              }}
-            >
-              Retro Pixel Engine Ready
-            </p>
-
-            <span
-              style={{
-                display: 'inline-block',
-                marginTop: '6px',
-                fontSize: '12px',
-                fontWeight: 600,
-                color: '#fdfbf7',
-                opacity: 0.85,
-              }}
-            >
-              Option 3: Ghost in the Pastel
-            </span>
-          </div>
-
-          {/* Bottom Dialogue Box */}
-          <div
-            className="firered-textbox"
-            style={{
-              pointerEvents: 'auto',
-              marginBottom: '4px',
-            }}
-          >
-            <div>Setup complete. All text rendered via vector typography.</div>
-            <div className="firered-prompt-arrow">▼</div>
+            {activeDialog && (
+              <DialogBox
+                speaker={activeDialog.speaker}
+                lines={activeDialog.lines}
+                onComplete={() => {
+                  if (npcDialog) {
+                    setNpcDialog(null);
+                  } else if (pendingReturnBonus?.eligible) {
+                    claimReturnBonus();
+                  }
+                }}
+              />
+            )}
           </div>
         </div>
+
+        {/* Modals */}
+        {activeModal === 'questLog' && (
+          <QuestLog
+            onClose={() => setActiveModal(null)}
+            onOpenAddQuest={() => setActiveModal('addQuest')}
+            onOpenAddChain={() => setActiveModal('addChain')}
+          />
+        )}
+
+        {activeModal === 'questBoard' && (
+          <QuestBoard
+            onClose={() => setActiveModal(null)}
+            onOpenAddQuest={() => setActiveModal('addQuest')}
+            onOpenAddChain={() => setActiveModal('addChain')}
+          />
+        )}
+
+        {activeModal === 'addQuest' && (
+          <AddQuestForm
+            onClose={() => setActiveModal('questLog')}
+            onCreated={() => setActiveModal('questLog')}
+          />
+        )}
+
+        {activeModal === 'addChain' && (
+          <AddChainForm
+            onClose={() => setActiveModal('questLog')}
+            onCreated={() => setActiveModal('questLog')}
+          />
+        )}
+
+        {activeModal === 'house' && (
+          <HouseScreen onClose={() => setActiveModal(null)} />
+        )}
+
+        {activeModal === 'inn' && (
+          <InnScreen onClose={() => setActiveModal(null)} />
+        )}
+
+        {lastReward && (
+          <RewardModal
+            playerName={player.name}
+            reward={lastReward}
+            onDismiss={dismissReward}
+          />
+        )}
       </div>
     </main>
   );

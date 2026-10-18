@@ -6,10 +6,13 @@
   --abyss-bg-void: #0a121e;
   --abyss-navy: #101c2e;
   --abyss-card-bg: #17273d;
+  --abyss-card-elevated: #1e324d;
   --abyss-steel-teal: #3f6b88;
   --abyss-pastel-ice: #88e2db;
   --abyss-soft-lilac: #c2a0d9;
   --abyss-vanilla: #fdfbf7;
+  --abyss-gold: #f6c86a;
+  --abyss-emerald: #6ee7b7;
 }
 
 * {
@@ -18,6 +21,18 @@
   padding: 0;
   user-select: none;
   -webkit-user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+button {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  cursor: pointer;
 }
 
 html,
@@ -32,7 +47,7 @@ body,
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  color: #101c2e;
+  color: var(--abyss-vanilla);
 }
 
 canvas {
@@ -47,26 +62,194 @@ canvas {
   box-shadow:
     inset -2px -2px 0px 0px #3f6b88,
     inset 2px 2px 0px 0px #c2a0d9,
-    0 8px 24px rgba(10, 18, 30, 0.5);
+    0 8px 24px rgba(10, 18, 30, 0.65);
   border-radius: 12px;
   padding: clamp(12px, 3.5vw, 18px) clamp(16px, 4vw, 22px);
   position: relative;
-  font-size: clamp(16px, 4vw, 19px);
+  font-size: clamp(16px, 4vw, 18px);
   font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: -0.2px;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
 }
 
 .firered-prompt-arrow {
   position: absolute;
-  right: clamp(14px, 3vw, 20px);
-  bottom: clamp(10px, 2.5vw, 14px);
-  font-size: clamp(12px, 3vw, 16px);
+  right: clamp(12px, 3vw, 18px);
+  bottom: clamp(8px, 2vw, 12px);
+  font-size: clamp(13px, 3.2vw, 16px);
   animation: blink-arrow 0.8s infinite steps(2);
-  color: #88e2db;
+  color: #3f6b88;
+}
+
+/* Tokyo Night / Option 3 Overlay Modal */
+.abyss-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 18, 30, 0.82);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  z-index: 30;
+  pointer-events: auto;
+}
+
+.abyss-modal {
+  width: 100%;
+  max-height: 100%;
+  background: var(--abyss-navy);
+  border: 2px solid var(--abyss-steel-teal);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(136, 226, 219, 0.22);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--abyss-vanilla);
+}
+
+.abyss-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--abyss-card-bg);
+  border-bottom: 2px solid var(--abyss-steel-teal);
+}
+
+.abyss-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--abyss-pastel-ice);
+  letter-spacing: -0.2px;
+}
+
+.abyss-modal-body {
+  padding: 12px 14px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.abyss-card {
+  background: var(--abyss-card-bg);
+  border: 1.5px solid var(--abyss-steel-teal);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.abyss-btn {
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 2px solid var(--abyss-steel-teal);
+  background: var(--abyss-card-elevated);
+  color: var(--abyss-vanilla);
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform 0.08s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.abyss-btn:active {
+  transform: scale(0.98);
+}
+
+.abyss-btn-primary {
+  background: var(--abyss-pastel-ice);
+  color: var(--abyss-navy);
+  border-color: var(--abyss-pastel-ice);
+  font-weight: 800;
+}
+
+.abyss-btn-lilac {
+  background: var(--abyss-soft-lilac);
+  color: var(--abyss-navy);
+  border-color: var(--abyss-soft-lilac);
+  font-weight: 800;
+}
+
+.abyss-btn-ghost {
+  background: transparent;
+  color: var(--abyss-vanilla);
+  border-color: var(--abyss-steel-teal);
+}
+
+.abyss-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(194, 160, 217, 0.2);
+  color: var(--abyss-soft-lilac);
+  border: 1px solid rgba(194, 160, 217, 0.45);
+}
+
+.abyss-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid var(--abyss-steel-teal);
+  background: var(--abyss-bg-void);
+  color: var(--abyss-vanilla);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.abyss-input:focus {
+  outline: none;
+  border-color: var(--abyss-pastel-ice);
 }
 
 @keyframes blink-arrow {
-  0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0; transform: translateY(2px); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-up {
+  animation: float-up 0.25s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
