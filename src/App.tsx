@@ -13,7 +13,7 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#10121f',
+        backgroundColor: '#121426',
         overflow: 'hidden',
         boxSizing: 'border-box',
         padding:
@@ -22,7 +22,7 @@ export const App: React.FC = () => {
     >
       {/* 
         Game Stage Container:
-        - Lo-Fi Midnight aesthetic with soft slate borders and gentle mint ambient glow
+        - Option 2: Cyber Dawn theme with dusty violet borders and pastel sky glow
       */}
       <div
         style={{
@@ -35,10 +35,10 @@ export const App: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '3px solid #20243d',
+          border: '3px solid #252a4e',
           borderRadius: '12px',
           overflow: 'hidden',
-          boxShadow: '0 0 60px rgba(0, 0, 0, 0.9), 0 0 25px rgba(125, 226, 209, 0.15)',
+          boxShadow: '0 0 60px rgba(0, 0, 0, 0.9), 0 0 25px rgba(123, 197, 234, 0.18)',
           margin: 'auto',
         }}
       >
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
             padding: 'clamp(14px, 3vw, 24px)',
           }}
         >
-          {/* Classic FireRed styled text box with pastel Lo-Fi accents */}
+          {/* Classic FireRed styled text box with Cyber Dawn accents */}
           <div
             className="firered-textbox"
             style={{

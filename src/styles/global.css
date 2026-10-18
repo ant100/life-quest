@@ -1,13 +1,13 @@
 @import '@fontsource/pixelify-sans/700.css';
 
 :root {
-  --lofi-bg-void: #10121f;
-  --lofi-midnight: #16192b;
-  --lofi-slate-card: #20243d;
-  --lofi-slate-blue: #5b6c9a;
-  --lofi-powder-mint: #7de2d1;
-  --lofi-lavender-rose: #d8a7ca;
-  --lofi-warm-cream: #f5f0bb;
+  --dawn-bg-void: #121426;
+  --dawn-indigo: #1b1e38;
+  --dawn-slate-card: #252a4e;
+  --dawn-dusty-violet: #8d72b2;
+  --dawn-pastel-sky: #7bc5ea;
+  --dawn-pastel-coral: #f39b9b;
+  --dawn-cloud-white: #edf2f7;
 }
 
 * {
@@ -27,7 +27,7 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--lofi-bg-void);
+  background-color: var(--dawn-bg-void);
   font-family: 'Pixelify Sans', monospace, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -38,15 +38,15 @@ canvas {
   image-rendering: crisp-edges;
 }
 
-/* FireRed-style text box softened with Lo-Fi Midnight pastel styling */
+/* FireRed-style text box with Cyber Dawn pastel styling */
 .firered-textbox {
-  background-color: #faf8f5;
-  color: #16192b;
-  border: 4px solid #20243d;
+  background-color: #fcfbfa;
+  color: #1b1e38;
+  border: 4px solid #252a4e;
   box-shadow:
-    inset -3px -3px 0px 0px #5b6c9a,
-    inset 3px 3px 0px 0px #d8a7ca,
-    0 6px 20px rgba(16, 18, 31, 0.7);
+    inset -3px -3px 0px 0px #8d72b2,
+    inset 3px 3px 0px 0px #f39b9b,
+    0 6px 20px rgba(18, 20, 38, 0.7);
   border-radius: 8px;
   padding: clamp(14px, 3.5vw, 20px) clamp(16px, 4vw, 24px);
   position: relative;
@@ -62,7 +62,7 @@ canvas {
   bottom: clamp(10px, 2.5vw, 16px);
   font-size: clamp(14px, 3vw, 18px);
   animation: blink-arrow 0.8s infinite steps(2);
-  color: #5b6c9a;
+  color: #f39b9b;
 }
 
 @keyframes blink-arrow {

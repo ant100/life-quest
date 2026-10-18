@@ -24,7 +24,7 @@ export const PhaserGame: React.FC = () => {
       height: GAME_HEIGHT,
       pixelArt: false,
       roundPixels: true,
-      backgroundColor: '#16192b', // Lo-Fi midnight slate
+      backgroundColor: '#1b1e38', // Deep indigo navy
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
