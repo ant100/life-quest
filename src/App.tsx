@@ -11,7 +11,7 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#120914',
+        backgroundColor: '#030712',
         overflow: 'hidden',
         paddingTop: 'env(safe-area-inset-top)',
         paddingBottom: 'env(safe-area-inset-bottom)',
@@ -19,7 +19,7 @@ export const App: React.FC = () => {
         paddingRight: 'env(safe-area-inset-right)',
       }}
     >
-      {/* Game Stage Container: Centers cleanly on iPad, Desktop, and Mobile */}
+      {/* Game Stage Container */}
       <div
         style={{
           width: '100%',
@@ -31,7 +31,8 @@ export const App: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 0 40px rgba(0, 0, 0, 0.8)',
+          border: '1px solid rgba(0, 240, 255, 0.2)',
+          boxShadow: '0 0 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.1)',
         }}
       >
         <PhaserGame />
@@ -52,16 +53,20 @@ export const App: React.FC = () => {
             padding: '16px',
           }}
         >
-          {/* FireRed styled Dialog Box overlay */}
+          {/* Cyberpunk Dialog Box overlay */}
           <div
-            className="firered-textbox"
+            className="cyber-dialog"
             style={{
               pointerEvents: 'auto',
               marginBottom: '10px',
             }}
           >
-            <div>Setup complete</div>
-            <div className="firered-prompt-arrow">▼</div>
+            <div className="cyber-dialog-header">
+              <span className="cyber-tag">SYSTEM // BOOT</span>
+              <span style={{ fontSize: '11px', color: '#00f0ff', letterSpacing: '1px' }}>V0.1.0</span>
+            </div>
+            <div className="cyber-dialog-text">Setup complete. Ready for Sonnet agent.</div>
+            <div className="cyber-prompt-arrow">▶</div>
           </div>
         </div>
       </div>

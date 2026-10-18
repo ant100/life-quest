@@ -1,5 +1,14 @@
-@import '@fontsource/pixelify-sans/400.css';
 @import '@fontsource/pixelify-sans/700.css';
+@import '@fontsource/rajdhani/600.css';
+@import '@fontsource/rajdhani/700.css';
+
+:root {
+  --cyber-yellow: #fcee0a;
+  --cyber-cyan: #00f0ff;
+  --cyber-pink: #ff003c;
+  --cyber-bg: #030712;
+  --cyber-card: #0b1329;
+}
 
 * {
   box-sizing: border-box;
@@ -18,10 +27,11 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #120914;
-  font-family: 'Pixelify Sans', monospace, sans-serif;
+  background-color: var(--cyber-bg);
+  font-family: 'Rajdhani', sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  color: #e2e8f0;
 }
 
 canvas {
@@ -29,35 +39,79 @@ canvas {
   image-rendering: crisp-edges;
 }
 
-/* FireRed-style text box with fluid, high-DPI legible scaling */
-.firered-textbox {
-  background-color: #fcfcfc;
-  color: #1f1f1f;
-  border: 4px solid #2a2a2a;
+/* Cyberpunk-themed High-Legibility Dialog Box */
+.cyber-dialog {
+  background: rgba(11, 19, 41, 0.95);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--cyber-cyan);
   box-shadow:
-    inset -3px -3px 0px 0px #b0b0b0,
-    inset 3px 3px 0px 0px #ffffff,
-    0 4px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  padding: clamp(14px, 3.5vw, 20px) clamp(16px, 4vw, 24px);
+    0 0 15px rgba(0, 240, 255, 0.3),
+    inset 0 0 15px rgba(0, 240, 255, 0.1),
+    0 8px 30px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
   position: relative;
+  padding: clamp(14px, 3.5vw, 20px) clamp(16px, 4vw, 24px);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 15px) 0,
+    100% 15px,
+    100% 100%,
+    15px 100%,
+    0 calc(100% - 15px)
+  );
+}
+
+.cyber-dialog-header {
+  display: flex;
+  align-items: center;
+  justifyContent: space-between;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  padding-bottom: 4px;
+}
+
+.cyber-tag {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(11px, 2.5vw, 13px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyber-yellow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cyber-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 6px var(--cyber-yellow);
+}
+
+.cyber-dialog-text {
+  font-family: 'Rajdhani', sans-serif;
   font-size: clamp(18px, 4.5vw, 24px);
   font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: 0.8px;
-  -webkit-font-smoothing: antialiased;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.35;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
 }
 
-.firered-prompt-arrow {
+.cyber-prompt-arrow {
   position: absolute;
-  right: clamp(12px, 3vw, 20px);
+  right: clamp(14px, 3vw, 20px);
   bottom: clamp(10px, 2.5vw, 16px);
-  font-size: clamp(16px, 3.5vw, 20px);
-  animation: blink-arrow 0.8s infinite steps(2);
-  color: #d84828;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: var(--cyber-yellow);
+  text-shadow: 0 0 8px var(--cyber-yellow);
+  animation: cyber-blink 0.7s infinite alternate ease-in-out;
 }
 
-@keyframes blink-arrow {
-  0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0; transform: translateY(3px); }
+@keyframes cyber-blink {
+  0% { opacity: 0.3; transform: translateX(-2px); }
+  100% { opacity: 1; transform: translateX(2px); }
 }

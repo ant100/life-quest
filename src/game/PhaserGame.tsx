@@ -12,7 +12,6 @@ export const PhaserGame: React.FC = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Guard against React StrictMode double instantiation
     if (gameRef.current) {
       gameRef.current.destroy(true);
       gameRef.current = null;
@@ -25,7 +24,7 @@ export const PhaserGame: React.FC = () => {
       height: GAME_HEIGHT,
       pixelArt: true,
       roundPixels: true,
-      backgroundColor: '#2d1b2e',
+      backgroundColor: '#070b19', // Cyberpunk deep night navy
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
