@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { BootScene } from './scenes/Boot';
 
-export const GAME_WIDTH = 160;
-export const GAME_HEIGHT = 240;
+// 320x480 gives crisp typography & clean 16px tile rendering (20x30 tiles)
+export const GAME_WIDTH = 320;
+export const GAME_HEIGHT = 480;
 
 export const PhaserGame: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export const PhaserGame: React.FC = () => {
       height: GAME_HEIGHT,
       pixelArt: true,
       roundPixels: true,
-      backgroundColor: '#070b19', // Cyberpunk deep night navy
+      backgroundColor: '#051c30',
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -11,7 +11,7 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#030712',
+        backgroundColor: '#0f1026',
         overflow: 'hidden',
         paddingTop: 'env(safe-area-inset-top)',
         paddingBottom: 'env(safe-area-inset-bottom)',
@@ -19,20 +19,20 @@ export const App: React.FC = () => {
         paddingRight: 'env(safe-area-inset-right)',
       }}
     >
-      {/* Game Stage Container */}
+      {/* Game Stage Container: Centers on Desktop, Tablet, and Mobile */}
       <div
         style={{
           width: '100%',
           height: '100%',
           maxWidth: '520px',
           maxHeight: '100dvh',
-          aspectRatio: '160 / 240',
+          aspectRatio: '320 / 480',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '1px solid rgba(0, 240, 255, 0.2)',
-          boxShadow: '0 0 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.1)',
+          border: '2px solid #042f40',
+          boxShadow: '0 0 50px rgba(15, 16, 38, 0.95), 0 0 20px rgba(83, 160, 196, 0.25)',
         }}
       >
         <PhaserGame />
@@ -53,20 +53,16 @@ export const App: React.FC = () => {
             padding: '16px',
           }}
         >
-          {/* Cyberpunk Dialog Box overlay */}
+          {/* Classic FireRed styled text box */}
           <div
-            className="cyber-dialog"
+            className="firered-textbox"
             style={{
               pointerEvents: 'auto',
               marginBottom: '10px',
             }}
           >
-            <div className="cyber-dialog-header">
-              <span className="cyber-tag">SYSTEM // BOOT</span>
-              <span style={{ fontSize: '11px', color: '#00f0ff', letterSpacing: '1px' }}>V0.1.0</span>
-            </div>
-            <div className="cyber-dialog-text">Setup complete. Ready for Sonnet agent.</div>
-            <div className="cyber-prompt-arrow">▶</div>
+            <div>Setup complete</div>
+            <div className="firered-prompt-arrow">▼</div>
           </div>
         </div>
       </div>
