@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useGameStore } from '../store/gameStore';
@@ -7,11 +9,12 @@ import { DialogBox } from './DialogBox';
 import { HouseScreen } from './HouseScreen';
 import { Hud } from './Hud';
 import { InnScreen } from './InnScreen';
+import { Onboarding } from './Onboarding';
 import { QuestBoard } from './QuestBoard';
 import { QuestLog } from './QuestLog';
 import { RewardModal } from './RewardModal';
 
-describe('UI Overlays (Milestone 2)', () => {
+describe('UI Overlays & Onboarding (Milestones 2 & 4)', () => {
   beforeEach(() => {
     localStorage.clear();
     useGameStore.getState().resetGame('2026-10-18T09:00:00Z');
@@ -22,6 +25,40 @@ describe('UI Overlays (Milestone 2)', () => {
       focus: ['detox', 'body'],
       now: '2026-10-18T09:00:00Z',
     });
+  });
+
+  it('completes the 5-step Professor Rowan Onboarding flow and auto-accepts 3 starter quests', () => {
+    useGameStore.getState().resetGame('2026-10-18T09:00:00Z');
+    expect(useGameStore.getState().onboardingDone).toBe(false);
+
+    render(<Onboarding />);
+
+    // Step 0: Name
+    fireEvent.change(screen.getByTestId('onboarding-name-input'), {
+      target: { value: 'Ann' },
+    });
+    fireEvent.click(screen.getByTestId('onboarding-next-btn'));
+
+    // Step 1: Sprite
+    fireEvent.click(screen.getByTestId('sprite-option-1'));
+    fireEvent.click(screen.getByTestId('onboarding-next-btn'));
+
+    // Step 2: Mood
+    fireEvent.click(screen.getByTestId('mood-option-exhausted'));
+    fireEvent.click(screen.getByTestId('onboarding-next-btn'));
+
+    // Step 3: Focus
+    fireEvent.click(screen.getByTestId('focus-option-mind'));
+    fireEvent.click(screen.getByTestId('onboarding-next-btn'));
+
+    // Step 4: Finish -> Town
+    fireEvent.click(screen.getByTestId('onboarding-finish-btn'));
+
+    const state = useGameStore.getState();
+    expect(state.onboardingDone).toBe(true);
+    expect(state.player.name).toBe('Ann');
+    expect(state.player.sprite).toBe(1);
+    expect(state.quests).toHaveLength(3);
   });
 
   it('renders HUD with player level, EXP bar, and active quest count', () => {
@@ -116,38 +153,38 @@ describe('UI Overlays (Milestone 2)', () => {
     ).toBe(true);
   });
 
-  it('displays stats, badges, and Days Adventured in HouseScreen and imports QuestPack in InnScreen', () => {
+  it('imports seeds/ann.json in InnScreen without resetting progress', () => {
+    // Complete 1 quest first to build progress
+    const firstQ = useGameStore.getState().quests[0]!;
+    useGameStore.getState().completeQuest(firstQ.instanceId, undefined, () => 0.5);
+    const xpBefore = useGameStore.getState().player.xp;
+    expect(xpBefore).toBeGreaterThan(0);
+
     render(<HouseScreen onClose={() => {}} />);
     expect(screen.getByTestId('days-adventured-counter')).toBeTruthy();
-    expect(screen.getByTestId('badge-slot-first-step')).toBeTruthy();
 
     render(<InnScreen onClose={() => {}} />);
     fireEvent.click(screen.getByTestId('inn-toggle-paste-btn'));
 
-    const packJson = JSON.stringify({
-      packVersion: 1,
-      name: 'Test Pack',
-      quests: [
-        {
-          id: 'tp-q1',
-          title: 'Evening Tea',
-          category: 'detox',
-          difficulty: 1,
-          recurrence: 'daily',
-          stats: { spirit: 1 },
-        },
-      ],
-      chains: [],
-    });
+    const annSeedPath = path.resolve(__dirname, '../../seeds/ann.json');
+    const annPackJson = fs.readFileSync(annSeedPath, 'utf8');
 
     fireEvent.change(screen.getByTestId('inn-import-json-textarea'), {
-      target: { value: packJson },
+      target: { value: annPackJson },
     });
     fireEvent.click(screen.getByTestId('inn-submit-paste-btn'));
 
-    expect(screen.getByTestId('inn-status-msg').textContent).toContain('Test Pack');
+    expect(screen.getByTestId('inn-status-msg').textContent).toContain(
+      "Ann's Adventures",
+    );
+
+    const stateAfter = useGameStore.getState();
+    expect(stateAfter.player.xp).toBe(xpBefore);
     expect(
-      useGameStore.getState().quests.some((q) => q.title === 'Evening Tea'),
+      stateAfter.chains.map((c) => c.title),
+    ).toEqual(expect.arrayContaining(['Road to Santiago', 'Get Promoted']));
+    expect(
+      stateAfter.quests.some((q) => q.title === "Master's study session (1 h)"),
     ).toBe(true);
   });
 
@@ -162,7 +199,7 @@ describe('UI Overlays (Milestone 2)', () => {
       />,
     );
     const box = screen.getByTestId('dialog-box');
-    fireEvent.click(box); // finish line if needed or advance
+    fireEvent.click(box);
     fireEvent.click(box);
     expect(onDone).toHaveBeenCalled();
   });

@@ -1,0 +1,196 @@
+{
+  "packVersion": 1,
+  "name": "Ann's Adventures",
+  "quests": [
+    {
+      "id": "ann-masters-study-1h",
+      "title": "Master's study session (1 h)",
+      "description": "One focused hour of readings, notes, or coursework for the Master's program.",
+      "category": "personal",
+      "difficulty": 2,
+      "recurrence": "weekly",
+      "stats": {
+        "mind": 2
+      },
+      "flavor": "Candlelight flickers over the scholar's desk as new mastery takes root."
+    }
+  ],
+  "chains": [
+    {
+      "id": "ann-chain-road-to-santiago",
+      "title": "Road to Santiago",
+      "description": "Step-by-step preparation for walking the Camino de Santiago pilgrimage.",
+      "source": "pack",
+      "steps": [
+        {
+          "id": "santiago-step-1",
+          "title": "5 km walk",
+          "description": "Head out for an easy, continuous 5 km walk.",
+          "category": "body",
+          "difficulty": 1,
+          "recurrence": "once",
+          "stats": { "body": 1, "spirit": 1 },
+          "flavor": "The yellow shell points the way forward."
+        },
+        {
+          "id": "santiago-step-2",
+          "title": "10 km walk",
+          "description": "Extend your range with a steady 10 km walk.",
+          "category": "body",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "body": 2 },
+          "flavor": "Your stride settles into a pilgrim's cadence."
+        },
+        {
+          "id": "santiago-step-3",
+          "title": "Buy proper walking boots",
+          "description": "Get fitted for trail-ready walking boots and merino socks.",
+          "category": "body",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "body": 1, "mind": 1 },
+          "flavor": "You equip Pilgrim Boots (+2 Trail Resilience)."
+        },
+        {
+          "id": "santiago-step-4",
+          "title": "15 km with backpack",
+          "description": "Walk 15 km carrying your loaded Camino pack.",
+          "category": "body",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "body": 2, "spirit": 1 },
+          "flavor": "Shoulders and hips learn the balance of the pack."
+        },
+        {
+          "id": "santiago-step-5",
+          "title": "Break in boots on 3 walks",
+          "description": "Complete three training walks in your new boots until they feel like home.",
+          "category": "body",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "body": 2 },
+          "flavor": "Not a single blister can slow you down now."
+        },
+        {
+          "id": "santiago-step-6",
+          "title": "20 km walk",
+          "description": "Complete a full 20 km stage walk in a single day.",
+          "category": "body",
+          "difficulty": 3,
+          "recurrence": "once",
+          "stats": { "body": 3, "spirit": 1 },
+          "flavor": "Distance becomes a meditation in motion."
+        },
+        {
+          "id": "santiago-step-7",
+          "title": "Two consecutive 15 km days",
+          "description": "Walk 15 km on two back-to-back days to test trail recovery.",
+          "category": "body",
+          "difficulty": 3,
+          "recurrence": "once",
+          "stats": { "body": 3, "spirit": 2 },
+          "flavor": "Waking up on day two and lacing your boots is the true test."
+        },
+        {
+          "id": "santiago-step-8",
+          "title": "Plan Camino stages",
+          "description": "Map out your daily stages, towns, and rest stops along the route.",
+          "category": "mind",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "mind": 2, "spirit": 1 },
+          "flavor": "Waymarks and ancient villages line your parchment map."
+        },
+        {
+          "id": "santiago-step-9",
+          "title": "Book first albergue",
+          "description": "Reserve your first night's albergue at the starting point.",
+          "category": "personal",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "spirit": 2, "mind": 1 },
+          "flavor": "A warm bunk awaits at the trailhead."
+        },
+        {
+          "id": "santiago-step-10",
+          "title": "Buen Camino!",
+          "description": "Step onto the trail and begin the pilgrimage.",
+          "category": "personal",
+          "difficulty": 3,
+          "recurrence": "once",
+          "stats": { "body": 2, "spirit": 3 },
+          "flavor": "Ultreia et Suseia! Beyond and higher—Buen Camino!"
+        }
+      ]
+    },
+    {
+      "id": "ann-chain-get-promoted",
+      "title": "Get Promoted",
+      "description": "Personalized career growth questline to step into the next role with clarity and confidence.",
+      "source": "pack",
+      "steps": [
+        {
+          "id": "ann-promo-1",
+          "title": "Define what the next level looks like for you",
+          "description": "Write down the exact scope, title, and impact you want in your next role.",
+          "category": "mind",
+          "difficulty": 1,
+          "recurrence": "once",
+          "stats": { "mind": 1, "spirit": 1 },
+          "flavor": "Clarity is the compass of ambition."
+        },
+        {
+          "id": "ann-promo-2",
+          "title": "List your key wins from the last 6 months",
+          "description": "Build a brag document of outcomes, leadership moments, and solved problems.",
+          "category": "mind",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "mind": 2, "wealth": 1 },
+          "flavor": "Your chronicle of deeds speaks for itself."
+        },
+        {
+          "id": "ann-promo-3",
+          "title": "Align with your manager on promotion criteria",
+          "description": "Share your goal and ask what concrete evidence is needed for the next level.",
+          "category": "wealth",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "wealth": 2, "spirit": 1 },
+          "flavor": "The guild requirements are now out in the open."
+        },
+        {
+          "id": "ann-promo-4",
+          "title": "Lead one high-visibility initiative",
+          "description": "Take ownership of a project that showcases next-level impact.",
+          "category": "mind",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "mind": 2, "wealth": 2 },
+          "flavor": "You step forward to lead the vanguard."
+        },
+        {
+          "id": "ann-promo-5",
+          "title": "Gather feedback after 1 month",
+          "description": "Check in with your manager and peers to confirm you are on track.",
+          "category": "mind",
+          "difficulty": 2,
+          "recurrence": "once",
+          "stats": { "mind": 2 },
+          "flavor": "Allies add their commendations to your dossier."
+        },
+        {
+          "id": "ann-promo-6",
+          "title": "Have the promotion conversation",
+          "description": "Present your impact calm and proud, and ask for the promotion.",
+          "category": "wealth",
+          "difficulty": 3,
+          "recurrence": "once",
+          "stats": { "wealth": 3, "spirit": 2 },
+          "flavor": "A new rank is earned!"
+        }
+      ]
+    }
+  ]
+}

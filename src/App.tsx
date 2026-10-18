@@ -10,6 +10,7 @@ import { DPad } from './ui/DPad';
 import { HouseScreen } from './ui/HouseScreen';
 import { Hud } from './ui/Hud';
 import { InnScreen } from './ui/InnScreen';
+import { Onboarding } from './ui/Onboarding';
 import { QuestBoard } from './ui/QuestBoard';
 import { QuestLog } from './ui/QuestLog';
 import { RewardModal } from './ui/RewardModal';
@@ -24,6 +25,7 @@ export type ActiveModal =
   | 'inn';
 
 export const App: React.FC = () => {
+  const onboardingDone = useGameStore((s) => s.onboardingDone);
   const player = useGameStore((s) => s.player);
   const lastReward = useGameStore((s) => s.lastReward);
   const pendingReturnBonus = useGameStore((s) => s.pendingReturnBonus);
@@ -46,9 +48,17 @@ export const App: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (onboardingDone) {
+      audio.playMusic('town');
+    } else {
+      audio.playMusic('mentor');
+    }
+  }, [onboardingDone]);
+
   const activeDialog =
     npcDialog ??
-    (pendingReturnBonus?.eligible
+    (onboardingDone && pendingReturnBonus?.eligible
       ? {
           speaker: 'Innkeeper Bram',
           lines: [pendingReturnBonus.message],
@@ -57,16 +67,19 @@ export const App: React.FC = () => {
 
   const hasActiveDialog = activeDialog !== null;
 
-  // Notify Phaser whenever a modal or dialog is open so world input pauses
+  // Notify Phaser whenever a modal, onboarding, or dialog is open so world input pauses
   useEffect(() => {
     const isAnyUiOpen =
-      activeModal !== null || lastReward !== null || hasActiveDialog;
+      !onboardingDone ||
+      activeModal !== null ||
+      lastReward !== null ||
+      hasActiveDialog;
     if (isAnyUiOpen) {
       eventBus.emit('ui:open', undefined);
     } else {
       eventBus.emit('ui:close', undefined);
     }
-  }, [activeModal, lastReward, hasActiveDialog]);
+  }, [onboardingDone, activeModal, lastReward, hasActiveDialog]);
 
   // Listen to Phaser world interactions
   useEffect(() => {
@@ -259,6 +272,8 @@ export const App: React.FC = () => {
         </div>
 
         {/* Modals */}
+        {!onboardingDone && <Onboarding />}
+
         {activeModal === 'questLog' && (
           <QuestLog
             onClose={() => setActiveModal(null)}
