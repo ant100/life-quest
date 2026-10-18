@@ -1,4 +1,6 @@
-@import '@fontsource/pixelify-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
 
 :root {
   --dawn-bg-void: #121426;
@@ -23,49 +25,48 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  height: 100dvh;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: var(--dawn-bg-void);
-  font-family: 'Pixelify Sans', monospace, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  color: #1b1e38;
 }
 
 canvas {
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  display: block;
 }
 
-/* FireRed-style text box with Cyber Dawn pastel styling */
+/* FireRed-style crisp high-DPI dialogue card */
 .firered-textbox {
-  background-color: #fcfbfa;
+  background-color: #ffffff;
   color: #1b1e38;
-  border: 4px solid #252a4e;
+  border: 3px solid #252a4e;
   box-shadow:
-    inset -3px -3px 0px 0px #8d72b2,
-    inset 3px 3px 0px 0px #f39b9b,
-    0 6px 20px rgba(18, 20, 38, 0.7);
-  border-radius: 8px;
-  padding: clamp(14px, 3.5vw, 20px) clamp(16px, 4vw, 24px);
+    inset -2px -2px 0px 0px #8d72b2,
+    inset 2px 2px 0px 0px #f39b9b,
+    0 8px 24px rgba(18, 20, 38, 0.45);
+  border-radius: 12px;
+  padding: clamp(12px, 3.5vw, 18px) clamp(16px, 4vw, 22px);
   position: relative;
-  font-size: clamp(18px, 4.5vw, 22px);
+  font-size: clamp(16px, 4vw, 19px);
   font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: 0.5px;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
 }
 
 .firered-prompt-arrow {
   position: absolute;
   right: clamp(14px, 3vw, 20px);
-  bottom: clamp(10px, 2.5vw, 16px);
-  font-size: clamp(14px, 3vw, 18px);
+  bottom: clamp(10px, 2.5vw, 14px);
+  font-size: clamp(12px, 3vw, 16px);
   animation: blink-arrow 0.8s infinite steps(2);
   color: #f39b9b;
 }
 
 @keyframes blink-arrow {
   0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0; transform: translateY(3px); }
+  50% { opacity: 0; transform: translateY(2px); }
 }
