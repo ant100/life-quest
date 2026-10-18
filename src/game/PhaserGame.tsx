@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { BootScene } from './scenes/Boot';
+import { TownScene } from './scenes/Town';
 
 export const GAME_WIDTH = 360;
 export const GAME_HEIGHT = 640;
@@ -12,6 +13,10 @@ export const PhaserGame: React.FC = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    if (typeof window !== 'undefined' && navigator.userAgent.includes('jsdom')) {
+      return;
+    }
+
     if (gameRef.current) {
       gameRef.current.destroy(true);
       gameRef.current = null;
@@ -22,14 +27,14 @@ export const PhaserGame: React.FC = () => {
       parent: containerRef.current,
       width: GAME_WIDTH,
       height: GAME_HEIGHT,
-      pixelArt: false,
+      pixelArt: true,
       roundPixels: true,
-      backgroundColor: '#101c2e', // Option 3 Abyss navy base
+      backgroundColor: '#101c2e',
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
-      scene: [BootScene],
+      scene: [BootScene, TownScene],
     };
 
     gameRef.current = new Phaser.Game(config);
@@ -45,6 +50,7 @@ export const PhaserGame: React.FC = () => {
   return (
     <div
       ref={containerRef}
+      data-testid="phaser-canvas-container"
       style={{
         width: '100%',
         height: '100%',

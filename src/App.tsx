@@ -6,6 +6,7 @@ import { useGameStore } from './store/gameStore';
 import { AddChainForm } from './ui/AddChainForm';
 import { AddQuestForm } from './ui/AddQuestForm';
 import { DialogBox } from './ui/DialogBox';
+import { DPad } from './ui/DPad';
 import { HouseScreen } from './ui/HouseScreen';
 import { Hud } from './ui/Hud';
 import { InnScreen } from './ui/InnScreen';
@@ -32,6 +33,7 @@ export const App: React.FC = () => {
 
   const [activeModal, setActiveModal] = useState<ActiveModal>(null);
   const [showQuickBar, setShowQuickBar] = useState(true);
+  const [showDPad, setShowDPad] = useState(false);
   const [npcDialog, setNpcDialog] = useState<{
     speaker: string;
     lines: string[];
@@ -169,6 +171,8 @@ export const App: React.FC = () => {
               gap: '8px',
             }}
           >
+            {showDPad && !activeDialog && activeModal === null && <DPad />}
+
             {showQuickBar && !activeDialog && (
               <nav
                 aria-label="Town quick travel"
@@ -176,7 +180,7 @@ export const App: React.FC = () => {
                 style={{
                   pointerEvents: 'auto',
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gridTemplateColumns: 'repeat(4, 1fr)',
                   gap: '6px',
                   background: 'rgba(16, 28, 46, 0.9)',
                   padding: '6px',
@@ -193,7 +197,7 @@ export const App: React.FC = () => {
                     audio.playSfx('select');
                     setActiveModal('questBoard');
                   }}
-                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                  style={{ fontSize: '12px', padding: '6px 4px' }}
                 >
                   📌 Board
                 </button>
@@ -205,7 +209,7 @@ export const App: React.FC = () => {
                     audio.playSfx('select');
                     setActiveModal('house');
                   }}
-                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                  style={{ fontSize: '12px', padding: '6px 4px' }}
                 >
                   🏠 House
                 </button>
@@ -217,9 +221,23 @@ export const App: React.FC = () => {
                     audio.playSfx('select');
                     setActiveModal('inn');
                   }}
-                  style={{ fontSize: '13px', padding: '6px 8px' }}
+                  style={{ fontSize: '12px', padding: '6px 4px' }}
                 >
                   🏮 Inn
+                </button>
+                <button
+                  type="button"
+                  data-testid="toggle-dpad-btn"
+                  className={
+                    showDPad ? 'abyss-btn abyss-btn-primary' : 'abyss-btn'
+                  }
+                  onClick={() => {
+                    audio.playSfx('select');
+                    setShowDPad((v) => !v);
+                  }}
+                  style={{ fontSize: '12px', padding: '6px 4px' }}
+                >
+                  🎮 Pad
                 </button>
               </nav>
             )}
