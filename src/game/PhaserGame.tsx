@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { BootScene } from './scenes/Boot';
 
-// High-DPI modern resolution (640 x 960).
-// Provides crisp vector/font rendering while rendering 16px pixel art tiles at 2x/3x/4x scale
 export const GAME_WIDTH = 640;
 export const GAME_HEIGHT = 960;
 
@@ -24,9 +22,9 @@ export const PhaserGame: React.FC = () => {
       parent: containerRef.current,
       width: GAME_WIDTH,
       height: GAME_HEIGHT,
-      pixelArt: false, // Allows crisp subpixel font rendering and sharp edges
+      pixelArt: false,
       roundPixels: true,
-      backgroundColor: '#051c30',
+      backgroundColor: '#1b2042', // Deep indigo canvas base
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -43,3 +43,8 @@ All tests and builds pass cleanly:
 ## 5. Remote Repository & Deployment Status
 - Remote GitHub repo: `https://github.com/ant100/life-quest`
 - GitHub Pages live URL: `https://ant100.github.io/life-quest/`
+
+## 6. Resolution & Viewport Calibration Update
+- **Internal Canvas Resolution**: Upgraded to **640 × 960** (High-DPI 2:3 aspect ratio).
+- **Pixel Art Compatibility**: Preserves retro tile rendering (rendered at 2x/32px scale) while providing razor-sharp typography and crisp UI edges on modern displays (iPhone 16, iPad, Pixel, Desktop).
+- **Responsive Viewport Alignment**: The game stage container uses `position: fixed` with dynamic `max(12px, env(safe-area-inset-*))` padding and flex auto-centering (`margin: auto`). The canvas remains centered vertically and horizontally across any aspect ratio or device notch without sinking to the bottom.

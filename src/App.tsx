@@ -13,16 +13,17 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#0f1026',
+        backgroundColor: '#14172f',
         overflow: 'hidden',
         boxSizing: 'border-box',
-        padding: 'max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left))',
+        padding:
+          'max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left))',
       }}
     >
       {/* 
         Game Stage Container:
-        - Completely centered both vertically & horizontally on iPad, iPhone 16, desktop, and tablets
-        - Maintains the 2:3 aspect ratio (640x960) without stretching or sinking to the bottom
+        - Centered across iPad, iPhone 16, Android, and Desktop
+        - Styled with the new palette: #3a4e93 border, #5994ce subtle outer glow
       */}
       <div
         style={{
@@ -35,10 +36,10 @@ export const App: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '2px solid #042f40',
+          border: '3px solid #3a4e93',
           borderRadius: '12px',
           overflow: 'hidden',
-          boxShadow: '0 0 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(83, 160, 196, 0.2)',
+          boxShadow: '0 0 60px rgba(10, 12, 26, 0.95), 0 0 25px rgba(89, 148, 206, 0.3)',
           margin: 'auto',
         }}
       >
@@ -60,7 +61,7 @@ export const App: React.FC = () => {
             padding: 'clamp(14px, 3vw, 24px)',
           }}
         >
-          {/* Classic FireRed styled text box with high-DPI scaling */}
+          {/* Classic FireRed styled text box with new palette */}
           <div
             className="firered-textbox"
             style={{
