@@ -11,7 +11,7 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#1b0e1d',
+        backgroundColor: '#120914',
         overflow: 'hidden',
         paddingTop: 'env(safe-area-inset-top)',
         paddingBottom: 'env(safe-area-inset-bottom)',
@@ -19,18 +19,19 @@ export const App: React.FC = () => {
         paddingRight: 'env(safe-area-inset-right)',
       }}
     >
-      {/* Phaser Canvas Container */}
+      {/* Game Stage Container: Centers cleanly on iPad, Desktop, and Mobile */}
       <div
         style={{
           width: '100%',
           height: '100%',
-          maxWidth: '480px',
-          maxHeight: '100%',
+          maxWidth: '520px',
+          maxHeight: '100dvh',
           aspectRatio: '160 / 240',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          boxShadow: '0 0 40px rgba(0, 0, 0, 0.8)',
         }}
       >
         <PhaserGame />
@@ -48,7 +49,7 @@ export const App: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            padding: '12px',
+            padding: '16px',
           }}
         >
           {/* FireRed styled Dialog Box overlay */}
@@ -56,7 +57,7 @@ export const App: React.FC = () => {
             className="firered-textbox"
             style={{
               pointerEvents: 'auto',
-              marginBottom: '8px',
+              marginBottom: '10px',
             }}
           >
             <div>Setup complete</div>
