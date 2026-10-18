@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { BootScene } from './scenes/Boot';
 
-// 360 x 640 matches modern 9:16 mobile viewports natively
 export const GAME_WIDTH = 360;
 export const GAME_HEIGHT = 640;
 
@@ -25,7 +24,7 @@ export const PhaserGame: React.FC = () => {
       height: GAME_HEIGHT,
       pixelArt: false,
       roundPixels: true,
-      backgroundColor: '#1b1e38',
+      backgroundColor: '#101c2e', // Option 3 Abyss navy base
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

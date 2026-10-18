@@ -3,13 +3,13 @@
 @import '@fontsource/plus-jakarta-sans/800.css';
 
 :root {
-  --dawn-bg-void: #121426;
-  --dawn-indigo: #1b1e38;
-  --dawn-slate-card: #252a4e;
-  --dawn-dusty-violet: #8d72b2;
-  --dawn-pastel-sky: #7bc5ea;
-  --dawn-pastel-coral: #f39b9b;
-  --dawn-cloud-white: #edf2f7;
+  --abyss-bg-void: #0a121e;
+  --abyss-navy: #101c2e;
+  --abyss-card-bg: #17273d;
+  --abyss-steel-teal: #3f6b88;
+  --abyss-pastel-ice: #88e2db;
+  --abyss-soft-lilac: #c2a0d9;
+  --abyss-vanilla: #fdfbf7;
 }
 
 * {
@@ -28,26 +28,26 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--dawn-bg-void);
+  background-color: var(--abyss-bg-void);
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  color: #1b1e38;
+  color: #101c2e;
 }
 
 canvas {
   display: block;
 }
 
-/* FireRed-style crisp high-DPI dialogue card */
+/* FireRed-style crisp high-DPI dialogue card with Option 3 Ghost in the Pastel colors */
 .firered-textbox {
   background-color: #ffffff;
-  color: #1b1e38;
-  border: 3px solid #252a4e;
+  color: #101c2e;
+  border: 3px solid #17273d;
   box-shadow:
-    inset -2px -2px 0px 0px #8d72b2,
-    inset 2px 2px 0px 0px #f39b9b,
-    0 8px 24px rgba(18, 20, 38, 0.45);
+    inset -2px -2px 0px 0px #3f6b88,
+    inset 2px 2px 0px 0px #c2a0d9,
+    0 8px 24px rgba(10, 18, 30, 0.5);
   border-radius: 12px;
   padding: clamp(12px, 3.5vw, 18px) clamp(16px, 4vw, 22px);
   position: relative;
@@ -63,7 +63,7 @@ canvas {
   bottom: clamp(10px, 2.5vw, 14px);
   font-size: clamp(12px, 3vw, 16px);
   animation: blink-arrow 0.8s infinite steps(2);
-  color: #f39b9b;
+  color: #88e2db;
 }
 
 @keyframes blink-arrow {

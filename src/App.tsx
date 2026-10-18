@@ -11,14 +11,14 @@ export const App: React.FC = () => {
         height: '100dvh',
         display: 'grid',
         placeItems: 'center',
-        backgroundColor: '#121426',
+        backgroundColor: '#0a121e',
         overflow: 'hidden',
         boxSizing: 'border-box',
         padding: 'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
       }}
     >
       {/* 
-        Game Stage Container (9:16 mobile aspect ratio, centered across all devices)
+        Game Stage Container (Option 3: Ghost in the Pastel)
       */}
       <div
         style={{
@@ -31,16 +31,16 @@ export const App: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '3px solid #252a4e',
+          border: '3px solid #17273d',
           borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: '0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(123, 197, 234, 0.2)',
+          boxShadow: '0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(136, 226, 219, 0.18)',
         }}
       >
-        {/* Canvas Layer: Pixel art world, characters, tiles only */}
+        {/* Canvas Layer: Pixel art world only */}
         <PhaserGame />
 
-        {/* UI Overlay Layer: All text, cards, dialogs rendered with crisp vector typography */}
+        {/* UI Overlay Layer: Real HTML vector typography */}
         <div
           id="ui-layer"
           style={{
@@ -53,13 +53,13 @@ export const App: React.FC = () => {
             padding: '20px 16px',
           }}
         >
-          {/* Header Card (HTML / CSS DOM element with vector subpixel font rendering) */}
+          {/* Header Card (Option 3 Palette) */}
           <div
             style={{
               pointerEvents: 'auto',
-              background: 'rgba(37, 42, 78, 0.95)',
-              border: '2px solid #8d72b2',
-              boxShadow: '0 8px 24px rgba(18, 20, 38, 0.6), inset 0 0 0 1px rgba(123, 197, 234, 0.3)',
+              background: 'rgba(23, 39, 61, 0.95)',
+              border: '2px solid #3f6b88',
+              boxShadow: '0 8px 24px rgba(10, 18, 30, 0.6), inset 0 0 0 1px rgba(136, 226, 219, 0.25)',
               borderRadius: '14px',
               padding: '16px 20px',
               textAlign: 'center',
@@ -69,8 +69,8 @@ export const App: React.FC = () => {
             <div
               style={{
                 display: 'inline-block',
-                backgroundColor: '#f39b9b',
-                color: '#1b1e38',
+                backgroundColor: '#c2a0d9',
+                color: '#101c2e',
                 fontSize: '11px',
                 fontWeight: 800,
                 letterSpacing: '1px',
@@ -88,10 +88,10 @@ export const App: React.FC = () => {
                 margin: '0 0 4px 0',
                 fontSize: 'clamp(28px, 6vw, 34px)',
                 fontWeight: 800,
-                color: '#7bc5ea',
+                color: '#88e2db',
                 letterSpacing: '-0.5px',
                 lineHeight: 1.1,
-                textShadow: '0 2px 10px rgba(123, 197, 234, 0.3)',
+                textShadow: '0 2px 10px rgba(136, 226, 219, 0.35)',
               }}
             >
               LIFE QUEST
@@ -102,7 +102,7 @@ export const App: React.FC = () => {
                 margin: 0,
                 fontSize: '14px',
                 fontWeight: 700,
-                color: '#f39b9b',
+                color: '#c2a0d9',
                 letterSpacing: '0.2px',
               }}
             >
@@ -115,15 +115,15 @@ export const App: React.FC = () => {
                 marginTop: '6px',
                 fontSize: '12px',
                 fontWeight: 600,
-                color: '#edf2f7',
-                opacity: 0.8,
+                color: '#fdfbf7',
+                opacity: 0.85,
               }}
             >
-              Crisp Vector Typography (React Overlay)
+              Option 3: Ghost in the Pastel
             </span>
           </div>
 
-          {/* Bottom Dialogue Box (FireRed styled, pure HTML/CSS) */}
+          {/* Bottom Dialogue Box */}
           <div
             className="firered-textbox"
             style={{
