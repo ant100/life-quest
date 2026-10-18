@@ -1,0 +1,60 @@
+@import '@fontsource/pixelify-sans/400.css';
+@import '@fontsource/pixelify-sans/700.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1a0f1d;
+  font-family: 'Pixelify Sans', monospace, sans-serif;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* FireRed-style text box */
+.firered-textbox {
+  background-color: #f8f8f8;
+  color: #282828;
+  border: 4px solid #303030;
+  box-shadow:
+    inset -2px -2px 0px 0px #b8b8b8,
+    inset 2px 2px 0px 0px #ffffff,
+    0 4px 0px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 12px 14px;
+  position: relative;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.firered-prompt-arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  font-size: 14px;
+  animation: blink-arrow 0.8s infinite steps(2);
+}
+
+@keyframes blink-arrow {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0; transform: translateY(2px); }
+}
