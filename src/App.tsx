@@ -13,7 +13,7 @@ export const App: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#14172f',
+        backgroundColor: '#10121f',
         overflow: 'hidden',
         boxSizing: 'border-box',
         padding:
@@ -22,8 +22,7 @@ export const App: React.FC = () => {
     >
       {/* 
         Game Stage Container:
-        - Centered across iPad, iPhone 16, Android, and Desktop
-        - Styled with the new palette: #3a4e93 border, #5994ce subtle outer glow
+        - Lo-Fi Midnight aesthetic with soft slate borders and gentle mint ambient glow
       */}
       <div
         style={{
@@ -36,10 +35,10 @@ export const App: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '3px solid #3a4e93',
+          border: '3px solid #20243d',
           borderRadius: '12px',
           overflow: 'hidden',
-          boxShadow: '0 0 60px rgba(10, 12, 26, 0.95), 0 0 25px rgba(89, 148, 206, 0.3)',
+          boxShadow: '0 0 60px rgba(0, 0, 0, 0.9), 0 0 25px rgba(125, 226, 209, 0.15)',
           margin: 'auto',
         }}
       >
@@ -61,7 +60,7 @@ export const App: React.FC = () => {
             padding: 'clamp(14px, 3vw, 24px)',
           }}
         >
-          {/* Classic FireRed styled text box with new palette */}
+          {/* Classic FireRed styled text box with pastel Lo-Fi accents */}
           <div
             className="firered-textbox"
             style={{

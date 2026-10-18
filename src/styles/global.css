@@ -1,12 +1,13 @@
 @import '@fontsource/pixelify-sans/700.css';
 
 :root {
-  --pal-violet: #5c58b6;
-  --pal-magenta: #b957ce;
-  --pal-sky-blue: #5994ce;
-  --pal-deep-navy: #3a4e93;
-  --pal-bg-void: #14172f;
-  --pal-card-bg: #1e2448;
+  --lofi-bg-void: #10121f;
+  --lofi-midnight: #16192b;
+  --lofi-slate-card: #20243d;
+  --lofi-slate-blue: #5b6c9a;
+  --lofi-powder-mint: #7de2d1;
+  --lofi-lavender-rose: #d8a7ca;
+  --lofi-warm-cream: #f5f0bb;
 }
 
 * {
@@ -26,7 +27,7 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--pal-bg-void);
+  background-color: var(--lofi-bg-void);
   font-family: 'Pixelify Sans', monospace, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -37,15 +38,15 @@ canvas {
   image-rendering: crisp-edges;
 }
 
-/* FireRed classic high-contrast text box with the new palette */
+/* FireRed-style text box softened with Lo-Fi Midnight pastel styling */
 .firered-textbox {
-  background-color: #fafbfc;
-  color: #14172f;
-  border: 4px solid #3a4e93;
+  background-color: #faf8f5;
+  color: #16192b;
+  border: 4px solid #20243d;
   box-shadow:
-    inset -3px -3px 0px 0px #5c58b6,
-    inset 3px 3px 0px 0px #b957ce,
-    0 6px 18px rgba(20, 23, 47, 0.7);
+    inset -3px -3px 0px 0px #5b6c9a,
+    inset 3px 3px 0px 0px #d8a7ca,
+    0 6px 20px rgba(16, 18, 31, 0.7);
   border-radius: 8px;
   padding: clamp(14px, 3.5vw, 20px) clamp(16px, 4vw, 24px);
   position: relative;
@@ -61,7 +62,7 @@ canvas {
   bottom: clamp(10px, 2.5vw, 16px);
   font-size: clamp(14px, 3vw, 18px);
   animation: blink-arrow 0.8s infinite steps(2);
-  color: #b957ce;
+  color: #5b6c9a;
 }
 
 @keyframes blink-arrow {
