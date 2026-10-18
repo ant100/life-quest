@@ -48,3 +48,17 @@ All tests and builds pass cleanly:
 - **Internal Canvas Resolution**: Upgraded to **640 × 960** (High-DPI 2:3 aspect ratio).
 - **Pixel Art Compatibility**: Preserves retro tile rendering (rendered at 2x/32px scale) while providing razor-sharp typography and crisp UI edges on modern displays (iPhone 16, iPad, Pixel, Desktop).
 - **Responsive Viewport Alignment**: The game stage container uses `position: fixed` with dynamic `max(12px, env(safe-area-inset-*))` padding and flex auto-centering (`margin: auto`). The canvas remains centered vertically and horizontally across any aspect ratio or device notch without sinking to the bottom.
+
+## 7. Color Palette & Typography Specifications
+- **Selected Baseline Palette (Option 3 - "Ghost in the Pastel / Tokyo Night Calm")**:
+  - Base background / abyss: `#101C2E` (or Tokyo Night deep dark `#1a1b26`)
+  - Card & UI container background: `#17273D`
+  - Structural frames & borders: `#3F6B88`
+  - Primary title & ice accent: `#88E2DB` (or Tokyo Night cyan `#7dcfff`)
+  - Badges & subtitle: `#C2A0D9` (or Tokyo Night purple `#bb9af7`)
+  - Reading text: `#FDFBF7` (or Tokyo Night foreground `#c0caf5`)
+- **Typography Architecture**:
+  - The Phaser canvas is strictly for graphics, tiles, maps, and character animations.
+  - All text, dialogue cards, quest logs, and HUD elements are rendered via React HTML/CSS using `@fontsource/plus-jakarta-sans` for razor-sharp legibility across all Retina and high-DPI displays.
+- **Viewport Dimension**:
+  - Native stage ratio: 9:16 portrait (`360×640` virtual resolution, scaled with CSS `display: grid; place-items: center` and `min(92vw, 440px)` / `min(88dvh, 760px)`). Perfectly centered on iPhone 16, Pixel, iPad, and desktop.
